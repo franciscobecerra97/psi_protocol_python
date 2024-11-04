@@ -7,4 +7,4 @@ Our implementation is based on this [paper](https://eprint.iacr.org/2017/299.pdf
 
 **Disclaimer:** 
 * Our implementation is not meant for production use. Use it at your own risk.
-* The original version is available here: https://github.com/bit-ml/Private-Set-Intersection/blob/main/README.md
+* The original version is available here: https://github.com/bit-ml/Private-Set-Intersection/tree/main
