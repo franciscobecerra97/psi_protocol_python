@@ -88,7 +88,7 @@ def simple_hasing( dataset = []):
     # log_no_hashes = int( log2( number_of_hashes ) ) + 1
     # dummy_value = 2 ** ( sigma_max - output_bits + log_no_hashes ) + 1 
 
-    # simple_hashed_data is padded with dummy_msg_serve
+    # simple_hashed_data is padded with dummy_msg_servere
     number_of_bins = 2 ** output_bits
     for i in range( number_of_bins ):
         for j in range( bin_capacity ):
@@ -217,74 +217,74 @@ if __name__ == '__main__':
     # OPRF protocol
     # ####################################################################################
     
-    #  Government
+    #  Server
     # ##############################
 
     # # 1: OPRF encoding
-    gk = 1234567891011121314151617181920
-    gov_gk = import_and_encrypt_to_elliptical_curve( path = "data_set/server", secret_key = gk, print_label="NONE" )
-    # print( "\n\n" + str( gov_gk ) )
+    sk = 1234567891011121314151617181920
+    server_sk = import_and_encrypt_to_elliptical_curve( path = "data_set/server", secret_key = sk, print_label="NONE" )
+    # print( "\n\n" + str( server_sk ) )
 
-    gov_sigm = elliptical_curve_to_sigma_bits( gov_gk )
-    # print( "\n\n" + str( gov_sigm ))
+    server_sigm = elliptical_curve_to_sigma_bits( server_sk )
+    # print( "\n\n" + str( server_sigm ))
     
     # 2: Simple Hasing
-    gov_pre = [ i%module for i in gov_sigm ]
-    gov_sh = simple_hasing( dataset = gov_pre )
-    # print( "\n\n" + str( gov_sh ) )
+    server_pre = [ i%module for i in server_sigm ]
+    server_sh = simple_hasing( dataset = server_pre )
+    # print( "\n\n" + str( server_sh ) )
 
     # 3: Particion & Polynomial calculation
-    gov_poly = particion_and_polynomial( dataset = gov_sh )
-    # print( "\n\n" + str( gov_poly ) )
+    server_poly = particion_and_polynomial( dataset = server_sh )
+    # print( "\n\n" + str( server_poly ) )
 
-    #  Bank
-    # ##############################
+    # #  Client
+    # # ##############################
 
     # 1: OPRF encoding
-    bk = 12345678910111213141516171819222222222222
-    bak = import_full_data( path = "data_set/client" )
-    bak_bk = import_and_encrypt_to_elliptical_curve( path = "data_set/client", secret_key = bk, print_label="NONE" )
-    # print( "\n\n" + str( bak_bk ) )
+    ck = 12345678910111213141516171819222222222222
+    client = import_full_data( path = "data_set/client" )
+    client_ck = import_and_encrypt_to_elliptical_curve( path = "data_set/client", secret_key = ck, print_label="NONE" )
+    # print( "\n\n" + str( client_ck ) )
 
-    bak_bkgk = encrypt( bak_bk, gk )
-    # print( "\n\n" + str( bak_bkgk ) )
+    client_cksk = encrypt( client_ck, sk )
+    # print( "\n\n" + str( client_cksk ) )
     
-    key_inverse = pow( bk, -1, order_of_generator )
-    bak_gk = encrypt( dataset = bak_bkgk, secret_key = key_inverse )
-    # print( "\n\n" + str( bak_gk ) )
+    key_inverse = pow( ck, -1, order_of_generator )
+    client_sk = encrypt( dataset = client_cksk, secret_key = key_inverse )
+    # print( "\n\n" + str( client_sk ) )
 
-    bak_sig = elliptical_curve_to_sigma_bits( bak_gk )
-    # print( "\n\n" + str( bak_sig ))
+    client_sig = elliptical_curve_to_sigma_bits( client_sk )
+    # print( "\n\n" + str( client_sig ))
     
     # 2: cuckoo hasing
-    bak_pre = [ i%module for i in bak_sig ]
-    # print( "\n\n" + str( bak_pre ) )
+    client_pre = [ i%module for i in client_sig ]
+    # print( "\n\n" + str( client_pre ) )
 
-    bak_ch = cuckoo_hashing( dataset = bak_pre )
-    # print( "\n\n" + str( bak_ch ) )
+    client_ch = cuckoo_hashing( dataset = client_pre )
+    # print( "\n\n" + str( client_ch ) )
 
-    # 3: Windowing
-    bak_win = windowing_process( bak_ch )
-    # print( "\n\n" + str( bak_win ) )
+    # # 3: Windowing
+    client_win = windowing_process( client_ch )
+    # print( "\n\n" + str( client_win ) )
 
     # 4: Batching
     private_context = ts.context( ts.SCHEME_TYPE.BFV, poly_modulus_degree=poly_modulus_degree, plain_modulus=plain_modulus )
-    bak_bat = batching_process( bak_win, private_context )
-    # print( "\n\n" + str( bak_bat ) )
+    client_bat = batching_process( client_win, private_context )
+    # print( "\n\n" + str( client_bat ) )
     
-    # ####################################################################################
-    # Polynomial evaluations
-    # ####################################################################################
+    # # ####################################################################################
+    # # Polynomial evaluations
+    # # ####################################################################################
     
-    #  Government
+    #  server
     # ##############################
-    gov_bak_poly_eval = poly_eval( gov_poly, bak_bat )
-    # print( "\n\n" + str( gov_bak_poly_eval ) )
+    server_client_poly_eval = poly_eval( server_poly, client_bat )
+    # print( "\n\n" + str( server_client_poly_eval ) )
     
     # ####################################################################################
     # Find the intersection
     # ####################################################################################
 
-    #  Bank
+    #  Client
     # ##############################
-    find_intersection( ciphertexts = gov_bak_poly_eval, structure = bak_ch, pre_dataset = bak_pre, dataset = bak )
+    find_intersection( ciphertexts = server_client_poly_eval, structure = client_ch, pre_dataset = client_pre, dataset = client )
