@@ -1,7 +1,8 @@
 import hashlib
 import tenseal as ts
 import random
-from testing_oprf import oprf
+from extras.oprf2 import oprf
+
 plain_modulus = 536903681
 print_len = 1000
 process_number = 1

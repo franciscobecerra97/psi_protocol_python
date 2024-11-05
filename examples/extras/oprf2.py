@@ -1,11 +1,13 @@
 import hashlib
 import tenseal as ts
 import random
-from oprf import server_prf_online_parallel, client_prf_offline, order_of_generator, G, client_prf_online_parallel, server_prf_online_single_thread
-from parameters import sigma_max, plain_modulus
+from math import log2
 from fastecdsa.curve import P192
 from fastecdsa.point import Point
-from math import log2
+
+from extras.parameters import sigma_max, plain_modulus
+from extras.oprf import server_prf_online_parallel, client_prf_offline, order_of_generator, G, client_prf_online_parallel, server_prf_online_single_thread
+
 plain_modulus = 536903681
 print_len = 1000
 

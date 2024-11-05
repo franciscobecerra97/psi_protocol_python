@@ -1,17 +1,18 @@
 import random
-from oprf import client_prf_offline, server_prf_online_parallel, order_of_generator, G
-from parameters import sigma_max, hash_seeds, plain_modulus, output_bits, number_of_hashes, bin_capacity
-from simple_hash import Simple_hash
-from cuckoo_hash import reconstruct_item, Cuckoo
 import numpy as np
 from math import log2
-from auxiliary_functions import coeffs_from_roots, power_reconstruct, windowing
 from fastecdsa.curve import P192
 from fastecdsa.point import Point
 import tenseal as ts
 from random import sample
 
-server_size = 8
+from extras.oprf import client_prf_offline, server_prf_online_parallel, order_of_generator, G
+from extras.parameters import sigma_max, hash_seeds, plain_modulus, output_bits, number_of_hashes, bin_capacity
+from extras.simple_hash import Simple_hash
+from extras.cuckoo_hash import reconstruct_item, Cuckoo
+from extras.auxiliary_functions import coeffs_from_roots, power_reconstruct, windowing
+
+server_size = 128
 client_size = int( server_size / 2 )
 intersection_size = int( client_size / 2 )
 

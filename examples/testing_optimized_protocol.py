@@ -1,16 +1,16 @@
 import random
-import tenseal as ts
-import hashlib
 import numpy as np
 from math import log2
-
-from oprf import client_prf_offline, server_prf_online_parallel, order_of_generator, G
-from parameters import sigma_max, hash_seeds, plain_modulus, output_bits, number_of_hashes, poly_modulus_degree
-from simple_hash import Simple_hash
-from cuckoo_hash import reconstruct_item, Cuckoo
-from auxiliary_functions import coeffs_from_roots, power_reconstruct, windowing
 from fastecdsa.curve import P192
 from fastecdsa.point import Point
+import tenseal as ts
+import hashlib
+
+from extras.oprf import client_prf_offline, server_prf_online_parallel, order_of_generator, G
+from extras.parameters import sigma_max, hash_seeds, plain_modulus, output_bits, number_of_hashes, poly_modulus_degree
+from extras.simple_hash import Simple_hash
+from extras.cuckoo_hash import reconstruct_item, Cuckoo
+from extras.auxiliary_functions import coeffs_from_roots, power_reconstruct, windowing
 
 ell = 1
 alpha = 3
@@ -199,16 +199,17 @@ def find_intersection( ciphertexts, structure = [], pre_dataset = [], dataset = 
     for ct in ciphertexts:
         decryptions.append( ct.decrypt() )
 
-    log_no_hashes = int(log2(number_of_hashes)) + 1
+    log_no_hashes = int(log2( number_of_hashes )) + 1
     
     for j in range( alpha ):
         for i in range( 2 ** output_bits ):
             if decryptions[j][i] == 0:
-                try:
-                    recover_item = reconstruct_item( structure[i], i, hash_seeds[structure[i] % (2 ** log_no_hashes)])
-                    index = pre_dataset.index( recover_item )
-                    print( dataset[ index ] + ' was found it' )
-                except: None
+                print( 'element found it in: [' + str( j ) + '][' + str(i) + ']' )
+                # try:
+                #     recover_item = reconstruct_item( structure[i], i, hash_seeds[structure[i] % (2 ** log_no_hashes)])
+                #     index = pre_dataset.index( recover_item )
+                #     print( dataset[ index ] + ' was found it' )
+                # except: None
 
 if __name__ == '__main__':
 
@@ -221,7 +222,7 @@ if __name__ == '__main__':
 
     # # 1: OPRF encoding
     gk = 1234567891011121314151617181920
-    gov_gk = import_and_encrypt_to_elliptical_curve( path = "data_set/government", secret_key = gk, print_label="NONE" )
+    gov_gk = import_and_encrypt_to_elliptical_curve( path = "data_set/server", secret_key = gk, print_label="NONE" )
     # print( "\n\n" + str( gov_gk ) )
 
     gov_sigm = elliptical_curve_to_sigma_bits( gov_gk )
@@ -241,8 +242,8 @@ if __name__ == '__main__':
 
     # 1: OPRF encoding
     bk = 12345678910111213141516171819222222222222
-    bak = import_full_data( path = "data_set/bank" )
-    bak_bk = import_and_encrypt_to_elliptical_curve( path = "data_set/bank", secret_key = bk, print_label="NONE" )
+    bak = import_full_data( path = "data_set/client" )
+    bak_bk = import_and_encrypt_to_elliptical_curve( path = "data_set/client", secret_key = bk, print_label="NONE" )
     # print( "\n\n" + str( bak_bk ) )
 
     bak_bkgk = encrypt( bak_bk, gk )
