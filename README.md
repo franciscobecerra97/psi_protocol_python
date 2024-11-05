@@ -1,6 +1,6 @@
 This repository contains a simplified version of the original implementation published at [https://github.com/bit-ml/Private-Set-Intersection/tree/main](https://github.com/bit-ml/Private-Set-Intersection/tree/main). In this version, you'll find an additional folder called `examples`, which includes various examples that demonstrate the final version of the protocol in an easy-to-understand way. The purpose of this repository is to provide a basic, academic-focused version of the original implementation.
 ​
-### How to Run the Original Version
+## How to Run the Original Version
 
 1. **Set Up the Environment**  
 - Review the `requirements.txt` file for a list of necessary Python libraries.
@@ -13,10 +13,10 @@ This repository contains a simplified version of the original implementation pub
 - **Step 3:** In one terminal, start the server with `python server_online.py`. (This process will wait for the client to complete.)
 - **Step 4:** In a separate terminal, run `python client_online.py` to complete the process.
 
-## Addicional files
+## Run addicional examples
 
 
-### How It Works
+## How It Works
 
 This project is based on the [original repository](https://github.com/bit-ml/Private-Set-Intersection), which provides a Python implementation of the protocols discussed in two papers: [2017/299](https://eprint.iacr.org/2017/299.pdf) and [2018/787](https://eprint.iacr.org/2018/787.pdf).
 

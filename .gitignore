@@ -1,4 +1,6 @@
+__pycache__
 client_set
 intersection
 server_set
-__pycache__
+client_preprocessed
+server_preprocessed
