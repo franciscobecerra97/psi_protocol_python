@@ -22,7 +22,6 @@ Run the follow commands to:
 - `python testing_optimized_protocol.py` Full protocol emulation step by step, where besides including the testing_basic_protocol_oprf steps, performance improvement techniques are exemplified such as: windowing, batching, hasing, etc.
 - `python testing_particion.py` A simple example for a better understanding of the hasing process
 
-<!-- ![protocol interaction](images/2018-787.png) -->
 <img src="images/2018-787.png" alt="My Project Logo" width="500">
 
 
