@@ -2,12 +2,12 @@ This repository contains a simplified version of the original implementation pub
 ​
 ## How to Run the Original Version
 
-1. **Set Up the Environment**  
+**1. Set Up the Environment**  
 - Review the `requirements.txt` file for a list of necessary Python libraries.
 - We recommend using Python version 3.12.1 and a Linux environment for best compatibility.
 - For setup guidance, check out this [Codespace tutorial](https://www.youtube.com/watch?v=_01iCF9sO1c&ab_channel=GitHub).
 
-2. **Run the Process**  
+**2. Run the Process**  
 - **Step 1:** Run `python set_gen.py` to generate the server and client testing databases.
 - **Step 2:** Execute `python server_offline.py` and `python client_offline.py` to preprocess the data as part of the offline phase.
 - **Step 3:** In one terminal, start the server with `python server_online.py`. (This process will wait for the client to complete.)
