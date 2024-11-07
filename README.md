@@ -17,10 +17,10 @@ This repository contains a simplified version of the original implementation pub
 Within this folde you will find four examples for a better understanding of the PSI procotol proposed by [original repository](https://github.com/bit-ml/Private-Set-Intersection), a brief description of each document follows: 
 
 Run the follow commands to:
-- `python testing_basic_protocol` Emulate the most basic protocol interaction of [2017/299](https://eprint.iacr.org/2017/299.pdf) divided into 4 steps (pre-processing, encryption, polynomial evaluation, decryption and interaction).
-- `python testing_basic_protocol_oprf` Emulate the protocol interaction of [2018/787](https://eprint.iacr.org/2018/787.pdf) (similar to testing_basic_protocol but including the oprf process).
-- `python testing_optimized_protocol` Full protocol emulation step by step, where besides including the testing_basic_protocol_oprf steps, performance improvement techniques are exemplified such as: windowing, batching, hasing, etc.
-- `python testing_particion` A simple example for a better understanding of the hasing process
+- `python testing_basic_protocol.py` Emulate the most basic protocol interaction of [2017/299](https://eprint.iacr.org/2017/299.pdf) divided into 4 steps (pre-processing, encryption, polynomial evaluation, decryption and interaction).
+- `python testing_basic_protocol_oprf.py` Emulate the protocol interaction of [2018/787](https://eprint.iacr.org/2018/787.pdf) (similar to testing_basic_protocol but including the oprf process).
+- `python testing_optimized_protocol.py` Full protocol emulation step by step, where besides including the testing_basic_protocol_oprf steps, performance improvement techniques are exemplified such as: windowing, batching, hasing, etc.
+- `python testing_particion.py` A simple example for a better understanding of the hasing process
 
 **Note before to start:** to run the examples you need to access to the folder examples via terminal as follows: `cd examples`
 
