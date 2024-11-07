@@ -23,6 +23,8 @@ Run the follow commands to:
 - `python testing_particion.py` A simple example for a better understanding of the hasing process
 
 ![protocol interaction](images/2018-787.png)
+<img src="images/2018-787.png" alt="My Project Logo" width="200" height="100">
+
 
 **Note before to start:** to run the examples you need to access to the folder examples via terminal as follows: `cd examples`
 
