@@ -21,6 +21,7 @@ Run the follow commands to:
 - `python testing_basic_protocol_oprf.py` Emulate the protocol interaction of [2018/787](https://eprint.iacr.org/2018/787.pdf) (similar to testing_basic_protocol but including the oprf process).
 - `python testing_optimized_protocol.py` Full protocol emulation step by step, where besides including the testing_basic_protocol_oprf steps, performance improvement techniques are exemplified such as: windowing, batching, hasing, etc.
 - `python testing_particion.py` A simple example for a better understanding of the hasing process
+- `python testing_homomorphic_encryption.py` A simple example for a better understanding of the polynimial computacion
 
 <img src="images/2018-787.png" alt="My Project Logo" width="500">
 
